@@ -16,6 +16,7 @@ class BotInterface():
         self.worksheets = []
         self.offset = 0
         
+        
     def message_send(self, user_id, message, attachment=None):
         self.vk.method('messages.send',
                   {'user_id': user_id,
@@ -24,9 +25,12 @@ class BotInterface():
                    'random_id': get_random_id()})
         
     
+#    Сделать функцию def photos_send(self):
+         
+            
 # обработка событий / получение сообщений
 
-
+        
     def event_handler(self):
         for event in self.longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
