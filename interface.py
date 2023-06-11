@@ -50,7 +50,15 @@ class BotInterface():
                     else:
                         self.worksheets = self.vk_tools.search_worksheets(
                             self.params, self.offset)
-                        worksheet = self.worksheets.pop() 
+                        
+                        worksheet = self.worksheets.pop()
+                        
+                        '''
+                        проверка анкеты в БД c соответсвии с event.user_id
+                        если анкета уже была то сделать следующий self.worksheets.pop()
+                        с помощью цикла While
+                        '''
+                        
                         photos = self.vk_tools.get_photos(worksheet['id'])
                         photo_string = ''
                         for photo in photos:
@@ -60,7 +68,10 @@ class BotInterface():
                         event.user_id,
                         f'имя: {worksheet["name"]} ссылка: vk.com/{worksheet["id"]}',
                         attachment = photo_string
-                        )  
+                        )
+                    
+                    '''добавить анкету в БД c соответсвии с event.user_id'''
+
                 elif event.text.lower() == 'пока':
                     self.message_send(event.user_id, 'До новых встреч')
                 else:
